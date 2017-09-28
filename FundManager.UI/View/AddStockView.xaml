@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="FundManager.UI.View.AddStockView"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FundManager.Model;assembly=FundManager.Model"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="stocktypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:StockType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="24" Text=" Invalid " DockPanel.Dock="Left" />
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".4*"  MinWidth="80"/>
+            <ColumnDefinition Width=".6*" MinWidth="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Price" Foreground="White"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Quantity" Foreground="White"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Type" Foreground="White"/>
+
+        <TextBox Text="{Binding  StockModel.Price, ValidatesOnNotifyDataErrors=True, TargetNullValue=''}" Grid.Column="1" Margin="0" Grid.Row="0" TextWrapping="Wrap" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+        <TextBox Text="{Binding StockModel.Quantity, ValidatesOnNotifyDataErrors=True, TargetNullValue=''}" Grid.Column="1" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}" />
+        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Source={StaticResource stocktypes}}" SelectedItem="{Binding StockModel.Type}" VerticalContentAlignment="Center" />
+        <Button Command="{Binding AddStockCommand}" Content="Add Stock" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}"/>
+    </Grid>
+</UserControl>

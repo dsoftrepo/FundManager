@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="FundManager.UI.View.StockSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding StockSummaryList}" 
+                      Grid.Row="1" IsReadOnly="True" 
+                      AutoGenerateColumns="False" 
+                      HorizontalContentAlignment="Stretch" 
+                      VerticalContentAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Type}" Width="*" Header="Type" />
+                <DataGridTextColumn Binding="{Binding TotalNumber}" Width="*" Header="Total Number" />
+                <DataGridTextColumn Binding="{Binding TotalMarketValue}" Width="*" Header="Total Market Value" />
+                <DataGridTextColumn Binding="{Binding TotalStockWeight}" Width="*" Header="Total Stock Weight" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
